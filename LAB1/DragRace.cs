@@ -1,7 +1,7 @@
 ﻿using System;
 namespace CarSimulator
 {
-    public class DragRace
+    /*public class DragRace
     {
         static void Main(string[] args)
         {
@@ -20,4 +20,6 @@ namespace CarSimulator
             }
         }
     }
+    */
+
 }

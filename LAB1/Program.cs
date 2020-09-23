@@ -38,12 +38,19 @@ namespace CarSimulator
             double fd;// drag force and secondary position and acceleration
             double x1;
             double a;
+
             
 
 
             // run the simulation
             for (int i = 0; i < N; ++i)
             {
+                fd = 1 / 2 * 1.225 * drag_area * v * v;
+                a = (engine_force - fd) / mass;
+                v = Physics1D.compute_velocity(v, a, dt);
+                x1 = Physics1D.compute_position(x0, v, dt);
+                
+                
                 // TODO: COMPUTE UPDATED STATE HERE
 
                 t += dt;  // increment time
