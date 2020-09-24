@@ -45,14 +45,16 @@ namespace CarSimulator
             // run the simulation
             for (int i = 0; i < N; ++i)
             {
+                // TODO: COMPUTE UPDATED STATE HERE
+
+
                 fd = 1 / 2 * 1.225 * drag_area * v * v;
-                a = (engine_force - fd) / mass;
+                double f = engine_force - fd;
+                a = Physics1D .compute_acceleration(f,mass);
                 v = Physics1D.compute_velocity(v, a, dt);
                 x1 = Physics1D.compute_position(x0, v, dt);
                 
-                
-                // TODO: COMPUTE UPDATED STATE HERE
-
+              
                 t += dt;  // increment time
                 
                 // print the time and current state
