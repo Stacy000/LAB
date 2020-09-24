@@ -1,13 +1,13 @@
 ﻿using System;
 namespace CarSimulator
 {
-    /*public class DragRace
+    public class DragRace
     {
         static void Main(string[] args)
         {
 
-            //Car myTesla = new Car("Tesla", 1500, 1000, 0.51);
-            //Car myPrius = new Car("Prius", 1000, 750, 0.43);
+            Car myTesla = new Car("Tesla", 1500, 1000, 0.51);
+            Car myPrius = new Car("Prius", 1000, 750, 0.43);
 
             
             // drive for 60 seconds with delta time of 1s
@@ -20,6 +20,6 @@ namespace CarSimulator
             }
         }
     }
-    */
+    
 
 }

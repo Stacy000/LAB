@@ -1,7 +1,7 @@
 ﻿using System;
 namespace CarSimulator
 {
-   /* public class Highway
+    public class Highway
     {
         static void Main(string[] args)
         {
@@ -24,5 +24,5 @@ namespace CarSimulator
         }
 
     }
-   */
+   
 }
