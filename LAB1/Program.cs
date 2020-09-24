@@ -48,10 +48,16 @@ namespace CarSimulator
                 // TODO: COMPUTE UPDATED STATE HERE
 
 
-                fd = 1 / 2 * 1.225 * drag_area * v * v;
+                fd = 0.5 * 1.225 * drag_area * v * v;
+                //Console.Write("fd=");
+                //Console.WriteLine(fd);
                 double f = engine_force - fd;
                 a = Physics1D .compute_acceleration(f,mass);
+                
                 v = Physics1D.compute_velocity(v, a, dt);
+                //Console.Write("v=");
+                //Console.WriteLine(v);
+
                 x1 = Physics1D.compute_position(x0, v, dt);
                 
               

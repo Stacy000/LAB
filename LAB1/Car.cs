@@ -8,14 +8,15 @@ namespace CarSimulator
         private double dragArea;
         private double engineForce;
         public State myCarState;
-      
-       
+
+        State MyCarState = new State(0, 0, 0, 0);
+
         /// implement constructor and methods
         public Car()
         {
 
         }
-        public Car(string model, double mass, double engineForce, double dragArea,)
+        public Car(string model, double mass, double engineForce, double dragArea)
         {
             this.mass = mass;
             this.model = model;
@@ -28,7 +29,7 @@ namespace CarSimulator
         {
             string hello = "hello";
 
-            return hello ;
+            return hello;
         }
 
         public static double getMass()
@@ -46,11 +47,7 @@ namespace CarSimulator
 
         }
 
-        public static State getState()
-        {
-            
-        }
-         
+       
         //implement inheritence
 
 

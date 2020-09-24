@@ -3,7 +3,7 @@ namespace CarSimulator
 {
     public class DragRace
     {
-        static void Main(string[] args)
+       /* static void Main(string[] args)
         {
 
             Car myTesla = new Car("Tesla", 1500, 1000, 0.51);
@@ -19,6 +19,7 @@ namespace CarSimulator
                 // print who is in lead
             }
         }
+       */
     }
     
 

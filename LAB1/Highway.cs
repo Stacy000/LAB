@@ -3,7 +3,7 @@ namespace CarSimulator
 {
     public class Highway
     {
-        static void Main(string[] args)
+       /* static void Main(string[] args)
         {
             int fleetNumberPerType = 25;
             //Step 1: implement fleets of arrays/lists per vehicle type
@@ -22,7 +22,7 @@ namespace CarSimulator
 
 
         }
-
+       */
     }
    
 }
