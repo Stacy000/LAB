@@ -8,12 +8,19 @@ namespace CarSimulator
         private double dragArea;
         private double engineForce;
         public State myCarState;
+        bool on = false;
 
-        State MyCarState = new State(0, 0, 0, 0);
+        
 
         /// implement constructor and methods
         public Car()
         {
+            this.mass = 0;
+            this.model = null;
+            this.dragArea = 0;
+            this.engineForce = 0;
+
+            myCarState = new State();
 
         }
         public Car(string model, double mass, double engineForce, double dragArea)
@@ -22,27 +29,27 @@ namespace CarSimulator
             this.model = model;
             this.dragArea = dragArea;
             this.engineForce = engineForce;
+            
 
         }
 
-        public static string getModel()
+        public string getModel()
         {
-            string hello = "hello";
-
-            return hello;
+            return model;
         }
 
-        public static double getMass()
+        public double getMass()
         {
-            return 0;
+            return mass;
         }
 
-        public static void accelerate(bool on)
+        public void accelerate(bool on)
         {
+            
 
         }
         
-        public static void drive(double dt)
+        public void drive(double dt)
         {
 
         }

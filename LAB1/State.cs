@@ -26,13 +26,16 @@ namespace CarSimulator
 
         }
 
-        public static void set(double position, double velocity, double acceleration, double time)
+        public void set(double pos, double vel, double acc, double t)
         {
+            position = pos;
+            velocity = vel;
+            acceleration=acc;
+            time=t;
+
+            Console.WriteLine("position:{0}, velocity:{1}, acceleration:{2}, time:{3} ", pos, vel, acc, t);
 
         }
-
-        
-
 
     }
 }
