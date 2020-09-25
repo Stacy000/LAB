@@ -8,9 +8,8 @@ namespace CarSimulator
         private double dragArea;
         private double engineForce;
         public State myCarState;
-        bool on = false;
-
         
+
 
         /// implement constructor and methods
         public Car()
@@ -20,7 +19,7 @@ namespace CarSimulator
             this.dragArea = 0;
             this.engineForce = 0;
 
-            myCarState = new State();
+          //  myCarState = new State();
 
         }
         public Car(string model, double mass, double engineForce, double dragArea)
@@ -43,18 +42,29 @@ namespace CarSimulator
             return mass;
         }
 
-        public void accelerate(bool on)
-        {
-            
-
-        }
+     
         
         public void drive(double dt)
         {
 
+            double f= 0.5 * 1.225 * dragArea * myCarState.velocity * myCarState.velocity;
+            double acc = Physics1D.compute_acceleration(engineForce - f, mass);
+            double vel = Physics1D.compute_velocity(myCarState.velocity, myCarState.acceleration, dt);
+            double pos = Physics1D.compute_position(myCarState.position, myCarState.velocity, dt);
+            double t = myCarState.time + dt;
+
+
+            myCarState.set(pos, vel, acc, t);
         }
 
-       
+
+        public State getState()
+        {
+            return myCarState;
+
+        }
+
+
         //implement inheritence
 
 
