@@ -15,11 +15,11 @@ namespace CarSimulator
         public Car()
         {
             this.mass = 0;
-            this.model = null;
+            this.model = "";
             this.dragArea = 0;
             this.engineForce = 0;
-
-          //  myCarState = new State();
+            myCarState = new State();
+            
 
         }
         public Car(string model, double mass, double engineForce, double dragArea)
@@ -28,7 +28,7 @@ namespace CarSimulator
             this.model = model;
             this.dragArea = dragArea;
             this.engineForce = engineForce;
-            
+            myCarState = new State();
 
         }
 
@@ -69,4 +69,19 @@ namespace CarSimulator
 
 
     }
+
+    class Prius : Car
+    {
+        public Prius() : base()
+        {
+
+        }
+
+        public Prius(string model, double mass, double engineForce, double dragArea) : base(model, mass, engineForce, dragArea)
+        {
+
+        }
+    }
+
+
 }
