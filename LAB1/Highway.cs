@@ -4,7 +4,7 @@ namespace CarSimulator
 {
     public class Highway
     {
-       static void Main(string[] args)
+       /*static void Main(string[] args)
         {
             int fleetNumberPerType = 25;
             int dt = 1;
@@ -14,10 +14,10 @@ namespace CarSimulator
             var myCars = new List<Car>();
             for (int i = 0; i < fleetNumberPerType; i++)
             {
-                myCars.Add(new CarSimulator.Tesla("Tesla", 1500, 1000, 0.51));
-                myCars.Add(new CarSimulator.Prius("Prius", 1000, 750, 0.43));
-                myCars.Add(new CarSimulator.Mazda("Madza", 1100, 800, 0.6));
-                myCars.Add(new CarSimulator.Herbie("Herbie", 1010, 1200, 0.3));
+                myCars.Add(new CarSimulator.Tesla("Tesla", 1500, 1200, 0.57));
+                myCars.Add(new CarSimulator.Prius("Prius", 1800, 750, 0.48));
+                myCars.Add(new CarSimulator.Mazda("Madza", 1100, 800, 0.69));
+                myCars.Add(new CarSimulator.Herbie("Herbie", 1600, 800, 0.58));
             }
 
 
@@ -38,7 +38,7 @@ namespace CarSimulator
                     double v = myCars[i].myCarState.velocity;
                     double p = myCars[i].myCarState.position;
                     //Display the cars states acceleration, speed, position, etc
-                    Console.WriteLine("{0} At time{1}s {2}'s acceleration is {3}, velocity is {4}, position {5} ", i+1,t,cartype, a, v, p);
+                    Console.WriteLine("{0} At time={1}s {2}'s acceleration is {3}, velocity is {4}, position {5} ", i+1,t,cartype, a, v, p);
 
                 }
 
@@ -49,6 +49,7 @@ namespace CarSimulator
 
 
         }
+       */
        
     }
    

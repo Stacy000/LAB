@@ -124,8 +124,8 @@ namespace CarSimulator
         {
             
             Console.WriteLine("myCarState={0}", myCarState.velocity);
-            //double f = 0.5 * 1.225 * dragArea * myCarState.velocity * myCarState.velocity;
-            double a = Physics1D.compute_acceleration(engineForce, mass);
+            double f = 0.5 * 1.225 * dragArea * myCarState.velocity * myCarState.velocity;
+            double a = Physics1D.compute_acceleration(engineForce-f, mass);
             double v = Physics1D.compute_velocity(myCarState.velocity, a, dt);
             Console.WriteLine("v={0} ", v);
             v += random.Next(50); 

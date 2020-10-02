@@ -3,7 +3,7 @@ namespace CarSimulator
 {
     public class DragRace
     {
-       /* static void Main(string[] args)
+        static void Main(string[] args)
         {
 
             Car myTesla = new Car("Tesla", 1500, 1000, 0.51);
@@ -18,14 +18,21 @@ namespace CarSimulator
                 double priusAcceleration = myPrius.myCarState.acceleration;
                 double priusVelocity = myPrius.myCarState.velocity;
                 double priusPosition = myPrius.myCarState.position;
-                if (priusPosition < 402.3)
-                    myPrius.drive(dt);
 
                 double teslaAcceleration = myTesla.myCarState.acceleration;
                 double teslaVelocity = myTesla.myCarState.velocity;
                 double teslaPosition = myTesla.myCarState.position;
+
+                if (priusPosition < 402.3)
+                {
+                    myPrius.drive(dt);
+                }
+                  
                 if (teslaPosition < 402.3)
+                {
                     myTesla.drive(dt);
+                }
+                    
 
                 // print the time and current state
                 Console.WriteLine("t = " + t);
@@ -57,7 +64,7 @@ namespace CarSimulator
             }
 
 
-        }*/
+        }
         
     }
 }
