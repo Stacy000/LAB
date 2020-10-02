@@ -3,10 +3,10 @@ namespace CarSimulator
 {
     public class Car
     {
-        private double mass;
+        protected double mass;
         private string model;
         private double dragArea;
-        private double engineForce;
+        protected double engineForce;
         public State myCarState;
         
 
@@ -83,5 +83,53 @@ namespace CarSimulator
         }
     }
 
+    class Mazda : Car
+    {
+        public Mazda() : base()
+        {
+
+        }
+
+        public Mazda(string model, double mass, double engineForce, double dragArea) : base(model, mass, engineForce, dragArea)
+        {
+
+        }
+    }
+    class Tesla : Car
+    {
+        public Tesla() : base()
+        {
+
+        }
+
+        public Tesla(string model, double mass, double engineForce, double dragArea) : base(model, mass, engineForce, dragArea)
+        {
+
+        }
+    }
+    class Herbie : Car
+    {
+        Random random = new Random();
+
+        public Herbie() : base()
+        {
+
+        }
+
+        public Herbie(string model, double mass, double engineForce, double dragArea) : base(model, mass, engineForce, dragArea)
+        {
+
+        }
+
+        public void drive(double dt)
+        {
+            double a = Physics1D.compute_acceleration(engineForce, mass);
+            double v = Physics1D.compute_velocity(myCarState.velocity, a, dt);
+            v += random.Next(1000);
+            double p = Physics1D.compute_position(myCarState.position, v, dt);
+            double t = myCarState.time + dt;
+            myCarState.set(p, v, a, t);
+        }
+    }
 
 }
