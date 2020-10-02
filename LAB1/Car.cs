@@ -5,7 +5,7 @@ namespace CarSimulator
     {
         protected double mass;
         private string model;
-        private double dragArea;
+        protected double dragArea;
         protected double engineForce;
         public State myCarState;
         
@@ -44,13 +44,13 @@ namespace CarSimulator
 
      
         
-        public void drive(double dt)
+        public virtual void drive(double dt)
         {
 
             double f= 0.5 * 1.225 * dragArea * myCarState.velocity * myCarState.velocity;
             double acc = Physics1D.compute_acceleration(engineForce - f, mass);
-            double vel = Physics1D.compute_velocity(myCarState.velocity, myCarState.acceleration, dt);
-            double pos = Physics1D.compute_position(myCarState.position, myCarState.velocity, dt);
+            double vel = Physics1D.compute_velocity(myCarState.velocity, acc, dt);
+            double pos = Physics1D.compute_position(myCarState.position, vel, dt);
             double t = myCarState.time + dt;
 
 
@@ -104,13 +104,13 @@ namespace CarSimulator
 
         public Tesla(string model, double mass, double engineForce, double dragArea) : base(model, mass, engineForce, dragArea)
         {
-
+            
         }
     }
     class Herbie : Car
     {
         Random random = new Random();
-
+        
         public Herbie() : base()
         {
 
@@ -120,12 +120,16 @@ namespace CarSimulator
         {
 
         }
-
-        public void drive(double dt)
+        public override void drive(double dt)
         {
+            
+            Console.WriteLine("myCarState={0}", myCarState.velocity);
+            //double f = 0.5 * 1.225 * dragArea * myCarState.velocity * myCarState.velocity;
             double a = Physics1D.compute_acceleration(engineForce, mass);
             double v = Physics1D.compute_velocity(myCarState.velocity, a, dt);
-            v += random.Next(1000);
+            Console.WriteLine("v={0} ", v);
+            v += random.Next(50); 
+            Console.WriteLine("v={0} ", v);
             double p = Physics1D.compute_position(myCarState.position, v, dt);
             double t = myCarState.time + dt;
             myCarState.set(p, v, a, t);

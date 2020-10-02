@@ -33,8 +33,7 @@ namespace CarSimulator
             acceleration=acc;
             time=t;
 
-            Console.WriteLine("position:{0}, velocity:{1}, acceleration:{2}, time:{3} ", pos, vel, acc, t);
-
+            
         }
 
     }

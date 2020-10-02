@@ -4,7 +4,7 @@ namespace CarSimulator
 {
     class Program
     {
-        static void Main(string[] args)
+       /* static void Main(string[] args)
         {
             // read in car mass
             Console.WriteLine("Enter the mass of the car (kg): ");
@@ -59,15 +59,16 @@ namespace CarSimulator
                 //Console.WriteLine(v);
 
                 x1 = Physics1D.compute_position(x0, v, dt);
-                
-              
+
+                x0 = x1;
+
                 t += dt;  // increment time
                 
                 // print the time and current state
                 Console.WriteLine("t:{0}, a:{1}, v:{2}, x1:{3}, fd:{4} ", t, a, v, x1, fd);
             }
 
-        }
+        }*/
     }
 }
     
