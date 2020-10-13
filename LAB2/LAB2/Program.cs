@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Diagnostics;
 
 namespace MergeSort
 {
@@ -11,9 +13,13 @@ namespace MergeSort
             int[] arraySingleThread = new int[ARRAY_SIZE];
 
 
-
-
             // TODO : Use the "Random" class in a for loop to initialize an array
+            var rand = new Random();
+
+            for (int i = 0; i < ARRAY_SIZE; i++)
+            {
+                arraySingleThread[i] = rand.Next(1000);
+            }
 
             // copy array by value.. You can also use array.copy()
             int[] arrayMultiThread = arraySingleThread.Slice(0, arraySingleThread.Length);
@@ -25,14 +31,35 @@ namespace MergeSort
 
 
             //TODO :start the stopwatch
+
+            Stopwatch single = new Stopwatch();
+
+            single.Start();
+
             MergeSort(arraySingleThread);
+
             //TODO :Stop the stopwatch
 
+            single.Stop();
 
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan timeSingle = single.Elapsed;
+
+            Console.WriteLine(timeSingle);
 
             //TODO: Multi Threading Merge Sort
 
+            Stopwatch multi = new Stopwatch();
 
+            multi.Start();
+
+            MergeSort(arrayMultiThread);
+
+            multi.Stop();
+
+            TimeSpan timeMulti = multi.Elapsed;
+
+            Console.WriteLine(timeMulti);
 
 
 
@@ -48,9 +75,47 @@ namespace MergeSort
             static int[] Merge(int[] LA, int[] RA, int[] A)
             {
 
-                // TODO :implement
+                int i = 0;
+                int j = 0;
+                int k = 0;
+                while (i < LA.Length || j < RA.Length)
+                {
+                    if (i < LA.Length && j < RA.Length)
+                    {
+                        if (LA[i] <= RA[j])
+                        {
+                            A[k] = LA[i];
+                            i++;
+                            k++;
+                        }
 
+                        else
+                        {
+                            A[k] = RA[j];
+                            j++;
+                            k++;
+
+                        }
+
+                    }
+                    else if (i < LA.Length)
+                    {
+                        A[k] = LA[i];
+                        i++;
+                        k++;
+                    }
+                    else if (j < RA.Length)
+                    {
+                        A[k] = RA[j];
+                        j++;
+                        k++;
+
+                    }
+                }
+
+                return A;
             }
+
 
 
             /*
