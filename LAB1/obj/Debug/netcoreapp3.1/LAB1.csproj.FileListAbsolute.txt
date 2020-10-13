@@ -1,0 +1,11 @@
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/bin/Debug/netcoreapp3.1/LAB1.deps.json
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/bin/Debug/netcoreapp3.1/LAB1.runtimeconfig.json
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/bin/Debug/netcoreapp3.1/LAB1.runtimeconfig.dev.json
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/bin/Debug/netcoreapp3.1/LAB1.dll
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/bin/Debug/netcoreapp3.1/LAB1.pdb
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/obj/Debug/netcoreapp3.1/LAB1.AssemblyInfoInputs.cache
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/obj/Debug/netcoreapp3.1/LAB1.AssemblyInfo.cs
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/obj/Debug/netcoreapp3.1/LAB1.csproj.CoreCompileInputs.cache
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/obj/Debug/netcoreapp3.1/LAB1.dll
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/obj/Debug/netcoreapp3.1/LAB1.pdb
+/Users/naokosame/Desktop/CPEN333 lab/LAB1/LAB1/obj/Debug/netcoreapp3.1/LAB1.genruntimeconfig.cache

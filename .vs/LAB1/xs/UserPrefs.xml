@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{B8FF338E-85D4-4ED6-AD6A-5ADA8E18C854}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LAB1/Program.cs">
+    <Files>
+      <File FileName="../../../Downloads/State1.cs" Line="1" Column="1" />
+      <File FileName="LAB1/Car.cs" Line="126" Column="70" />
+      <File FileName="LAB1/Physics1D.cs" Line="1" Column="1" />
+      <File FileName="LAB1/Highway.cs" Line="52" Column="8" />
+      <File FileName="LAB1/State.cs" Line="36" Column="13" />
+      <File FileName="LAB1/Program.cs" Line="60" Column="1" />
+      <File FileName="LAB1/DragRace.cs" Line="33" Column="39" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LAB1" expanded="True">
+            <Node name="LAB1" expanded="True">
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.LAB1 PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
