@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace MergeSort
         static void Main(string[] args)
         {
 
-            int ARRAY_SIZE = 900000;
+            int ARRAY_SIZE = 15;
             int[] arraySingleThread = new int[ARRAY_SIZE];
             int[] arrayMultiThread = new int[ARRAY_SIZE];
             List<int> multi = new List<int>();
@@ -50,9 +51,13 @@ namespace MergeSort
 
             int[] subArray = new int[] { };
 
+            ArrayList myAL = new ArrayList();
+
             Stopwatch clock_multi = new Stopwatch();
+          //  int[] sub_array1 = new int[] { };
+          //  int[] merge = new int[] { };
 
-
+            PrintArray(arrayMultiThread);
             clock_multi.Start();
             if (n == 2) //splitting the array into 2 multi-thread
             {
@@ -88,34 +93,45 @@ namespace MergeSort
                      {
                          MergeSort(subArray); //mergesort the sub-array
 
-                         for (int x = 0; x < subArray.Length; x++)
-                         {
-                             arrayMultiThread[j - chunkSize + x] = subArray[x]; //replace arrayMultiThread with sorted sub-arrays
-                         }
+                         // merge = Merge(subArray, sub_array1, arrayMultiThread);
+                         // sub_array1 = subArray;
+                         // subArray = merge;
+                         /* for (int x = 0; x < subArray.Length; x++)
+                          {
+                              arrayMultiThread[j - chunkSize + x] = subArray[x]; //replace arrayMultiThread with sorted sub-arrays
+                          }*/
 
                      });
 
+                     
                      j = j + chunkSize; //the next sub-array will start with index j+chunkSize
                      t.Start();
+                     t.Join();
+                     PrintArray(subArray);
+                    //threads.Add(t);
 
-                     threads.Add(t);
+                }
 
-                 }
-
-                 foreach (Thread thread in threads)
+                /* foreach (Thread thread in threads)
                  {
                      thread.Join(); //to make sure the threads are processing in order.
+                    
 
-                 }
+                }
+                */
+                 foreach(object x in myAL)
+                {
+                    Console.WriteLine("why" + x);
+                }
+
+              
 
 
-
-
-
-             }
+            }
             
             
-            MergeSort(arrayMultiThread);
+           // MergeSort(arrayMultiThread);
+            PrintArray(arrayMultiThread);
 
             clock_multi.Stop();
 
