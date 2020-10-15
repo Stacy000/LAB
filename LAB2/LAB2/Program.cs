@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Diagnostics;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace MergeSort
 {
     class Program
@@ -9,20 +10,77 @@ namespace MergeSort
         static void Main(string[] args)
         {
 
-            int ARRAY_SIZE = 1000;
+            int ARRAY_SIZE = 10;
             int[] arraySingleThread = new int[ARRAY_SIZE];
-
+            int[] arrayMultiThread = new int[ARRAY_SIZE];
+            
 
             // TODO : Use the "Random" class in a for loop to initialize an array
             var rand = new Random();
 
-            for (int i = 0; i < ARRAY_SIZE; i++)
+            for (int k = 0; k < ARRAY_SIZE; k++)
             {
-                arraySingleThread[i] = rand.Next(1000);
+                arraySingleThread[k] = rand.Next(1000);
             }
 
             // copy array by value.. You can also use array.copy()
-            int[] arrayMultiThread = arraySingleThread.splice(0, arraySingleThread.Length);
+            Array.Copy(arraySingleThread, 0, arrayMultiThread, 0, arraySingleThread.Length);
+            Console.WriteLine("enter a number of multithread that you wish to merge");
+            int.TryParse(Console.ReadLine().Trim(), out int n);
+
+            List<int> multi = new List<int>();
+
+            for(int u = 0; u < arrayMultiThread.Length; u++)
+            {
+                multi.Add(arrayMultiThread[u]);
+            }
+
+
+
+            /*foreach (int num in multi)
+            {
+                Console.Write("," + num);
+            }
+            */
+
+
+            List<Thread> threads = new List<Thread>();
+            int chunkSize = multi.Count / n;
+            
+              int i = 0;
+              int j = 0;
+            Stopwatch clock_multi = new Stopwatch();
+
+
+            //能整除时
+            clock_multi.Start();
+            while (i < n && j < multi.Count)
+              {
+                List<int> subList = multi.GetRange(j, chunkSize);
+                //Console.WriteLine(subList.Count);
+                int[]subArray=subList.ToArray();
+                PrintArray(subArray);
+                
+                Thread t = new Thread(() => MergeSort(subArray));
+
+                t.Start();
+                threads.Add(t);
+                j = j + chunkSize;
+                i++;
+            }
+
+            foreach (Thread thread in threads)
+            {
+                thread.Join();
+            }
+
+            clock_multi.Stop();
+
+            TimeSpan timeMulti = clock_multi.Elapsed;
+
+            Console.WriteLine(timeMulti);
+
+
 
             /*TODO : Use the  "Stopwatch" class to measure the duration of time that
                it takes to sort an array using one-thread merge sort and
@@ -45,23 +103,21 @@ namespace MergeSort
             // Get the elapsed time as a TimeSpan value.
             TimeSpan timeSingle = single.Elapsed;
 
-            Console.WriteLine(timeSingle);
+            //Console.WriteLine(timeSingle);
+            //PrintArray(arraySingleThread);
+            IsSorted(arraySingleThread);
 
             //TODO: Multi Threading Merge Sort
 
-            Stopwatch multi = new Stopwatch();
-
-            multi.Start();
+          /*  
 
             MergeSort(arrayMultiThread);
 
             multi.Stop();
 
-            TimeSpan timeMulti = multi.Elapsed;
+            
 
-            Console.WriteLine(timeMulti);
-
-
+            */
 
 
 
