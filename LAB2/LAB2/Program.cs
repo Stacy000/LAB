@@ -10,23 +10,23 @@ namespace MergeSort
         static void Main(string[] args)
         {
 
-            int ARRAY_SIZE = 11;
+            int ARRAY_SIZE = 900000;
             int[] arraySingleThread = new int[ARRAY_SIZE];
             int[] arrayMultiThread = new int[ARRAY_SIZE];
             List<int> multi = new List<int>();
             List<Thread> threads = new List<Thread>();
 
-            // TODO : Use the "Random" class in a for loop to initialize an array
-            var rand = new Random();
+            Random rand = new Random();
 
             for (int k = 0; k < ARRAY_SIZE; k++)
             {
                 arraySingleThread[k] = rand.Next(1000);
             }
 
-            // copy array by value.. You can also use array.copy()
+          
             Array.Copy(arraySingleThread, 0, arrayMultiThread, 0, arraySingleThread.Length);
 
+            //PrintArray(arrayMultiThread);
 
             Console.WriteLine("enter a number of multithread that you wish to merge");
             int.TryParse(Console.ReadLine().Trim(), out int n);
@@ -37,11 +37,7 @@ namespace MergeSort
                 multi.Add(arrayMultiThread[u]);
             }
 
-            /*foreach (int num in multi)
-            {
-                Console.Write("," + num);
-            }
-            */
+            
 
 
 
@@ -56,40 +52,82 @@ namespace MergeSort
 
             Stopwatch clock_multi = new Stopwatch();
 
+
             clock_multi.Start();
-
-            while (j < multi.Count)
+            if (n == 2) //splitting the array into 2 multi-thread
             {
-                subArray = subArrays(j, chunkSize, arrayMultiThread);
-                j = j + chunkSize;
+                int[] subArray1 = subArrays(j, chunkSize, arrayMultiThread);
+                //PrintArray(subArray1);
+                j = chunkSize;
+                int[] subArray2 = subArrays(j, multi.Count - chunkSize,arrayMultiThread);
+                //PrintArray(subArray2);
 
-                Thread t = new Thread(() => MergeSort(subArray));
-                PrintArray(subArray);
+                Thread t1 = new Thread(() => MergeSort(subArray1));
 
-                t.Start();
-                threads.Add(t);
+                Thread t2 = new Thread(() => MergeSort(subArray2));
+
+                t1.Start();
+                t2.Start();
+                t1.Join();
+                t2.Join();
+
+                Merge(subArray1, subArray2, arrayMultiThread);
+               // PrintArray(arrayMultiThread);
             }
 
-            foreach (Thread thread in threads)
-            {
-                thread.Join();
-            }
+
+             else
+             {
+                 while (j < multi.Count)
+                 {
+                     subArray = subArrays(j, chunkSize, arrayMultiThread); //call the subarray function.
+
+
+                     Thread t = new Thread(() =>
+
+                     {
+                         MergeSort(subArray); //mergesort the sub-array
+
+                         for (int x = 0; x < subArray.Length; x++)
+                         {
+                             arrayMultiThread[j - chunkSize + x] = subArray[x]; //replace arrayMultiThread with sorted sub-arrays
+                         }
+
+                     });
+
+                     j = j + chunkSize; //the next sub-array will start with index j+chunkSize
+                     t.Start();
+
+                     threads.Add(t);
+
+                 }
+
+                 foreach (Thread thread in threads)
+                 {
+                     thread.Join(); //to make sure the threads are processing in order.
+
+                 }
+
+
+
+
+
+             }
+            
+            
+            MergeSort(arrayMultiThread);
 
             clock_multi.Stop();
 
             TimeSpan timeMulti = clock_multi.Elapsed;
 
-            Console.WriteLine(timeMulti);
-            
-            
+            Console.WriteLine("the execution time for multi thread is" + timeMulti);
+            // PrintArray(arrayMultiThread);
 
-            /*TODO : Use the  "Stopwatch" class to measure the duration of time that
-               it takes to sort an array using one-thread merge sort and
-               multi-thead merge sort
-            */
+            bool A = IsSorted(arrayMultiThread);
 
+            Console.WriteLine(A);
 
-            //TODO :start the stopwatch
 
             Stopwatch single = new Stopwatch();
 
@@ -97,28 +135,20 @@ namespace MergeSort
 
             MergeSort(arraySingleThread);
 
-            //TODO :Stop the stopwatch
+            
 
             single.Stop();
 
-            // Get the elapsed time as a TimeSpan value.
+            
             TimeSpan timeSingle = single.Elapsed;
 
-            //Console.WriteLine(timeSingle);
-            //PrintArray(arraySingleThread);
-            IsSorted(arraySingleThread);
+            Console.WriteLine("the execution time for single thread is" + timeSingle);
 
-            //TODO: Multi Threading Merge Sort
+          //  PrintArray(arraySingleThread);
 
-          /*  
+            bool B=IsSorted(arraySingleThread);
 
-            MergeSort(arrayMultiThread);
-
-            multi.Stop();
-
-            
-
-            */
+            Console.WriteLine(B);
 
 
 
@@ -235,7 +265,9 @@ namespace MergeSort
                 return i > j;
             }
 
-
+            //a function which takes the array that we are working on, the starting index j,
+            //and the size of the sub-array as input paramters, and returns a sub-array starting
+            //with index j of size chunkSize of the arrayMultiThread.
             static int[] subArrays(int j, int chunkSize, int[] arrayMultiThread)
             {
                 
@@ -245,6 +277,7 @@ namespace MergeSort
                 {
                     multi.Add(arrayMultiThread[u]);
                 }
+
                 List<int> subList = new List<int>();
 
                 int[] subArray = new int[] { };
@@ -260,9 +293,10 @@ namespace MergeSort
                 else
                 {
                     subList = multi.GetRange(j, chunkSize);
-                    Console.WriteLine(j);
+                    //Console.WriteLine(j);
                     subArray = subList.ToArray();
                 }
+
                 return subArray;
             }
 
