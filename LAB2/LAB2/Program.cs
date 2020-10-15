@@ -22,7 +22,7 @@ namespace MergeSort
             }
 
             // copy array by value.. You can also use array.copy()
-            int[] arrayMultiThread = arraySingleThread.Slice(0, arraySingleThread.Length);
+            int[] arrayMultiThread = arraySingleThread.splice(0, arraySingleThread.Length);
 
             /*TODO : Use the  "Stopwatch" class to measure the duration of time that
                it takes to sort an array using one-thread merge sort and
@@ -124,9 +124,31 @@ namespace MergeSort
             */
             static int[] MergeSort(int[] A)
             {
-
                 // TODO :implement
+                int array_length = A.Length;
+                
+                if (array_length < 2)
+                {
+                    return A;
+                }
 
+                int mid = array_length / 2;
+                int[] left = new int[mid];
+                int[] right = new int[array_length - mid];
+                for (int i = 0; i <= mid - 1; i++)
+                {
+                    left[i] = A[i];
+                }
+
+                for(int j = mid; j <= array_length - 1; j++)
+                {
+                    right[j - mid] = A[j];
+                }
+                MergeSort(left);
+                MergeSort(right);
+                Merge(left, right, A);
+
+                return A;
 
             }
 
