@@ -1,7 +1,4 @@
-Stacy Shang 
-62961990
-
-
+Stacy Shang 62961990
 Lab 2 Part 1
 Question 1:   
  #Threads=4
