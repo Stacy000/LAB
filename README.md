@@ -42,10 +42,10 @@ Lab 2 Part 1
  
  **Part2**   
  **Question 1**  
- - Multi-Threading doesn't always have short processing time.
- - the speed-up factor is largest when the number of threading equals to the number of cores  
- **question 2**  
- - We want to have numbers of multi-thread as same as numbers of core to producing the most efficient programs.  
- **Qeustion 3**
- - Larger than 10^8
- - The more samples we have, the more accurate the Monte Carlo simulation can be.
+ Multi-Threading doesn't always have short processing time.  
+ the speed-up factor is largest when the number of threading equals to the number of cores.    
+ **question 2**    
+ We want to have numbers of multi-thread as same as numbers of core to producing the most efficient programs.    
+ **Qeustion 3**  
+ Larger than 10^8  
+ The more samples we have, the more accurate the Monte Carlo simulation can be.
