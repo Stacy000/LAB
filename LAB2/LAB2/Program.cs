@@ -8,7 +8,7 @@ namespace MergeSort
 {
     class Program
     {
-        static void Main()
+      /*  static void Main()
         {
 
             int ARRAY_SIZE = 1000000;
@@ -25,8 +25,8 @@ namespace MergeSort
                 arraySingleThread[k] = rand.Next(1000);
             }
 
-            //*****Working on single thread*****/
-
+            ///*****Working on single thread*****///
+    /*
             Stopwatch single = new Stopwatch();
 
             single.Start();
@@ -66,7 +66,7 @@ namespace MergeSort
 
             ///*****Working on multi thread*****///
 
-            int chunkSize = multi.Count / n;
+        /*    int chunkSize = multi.Count / n;
             int j = 0;
 
             List<int[]> subList = new List<int[]>();
@@ -157,7 +157,7 @@ namespace MergeSort
             and constructs a sorted array in the size of combined arrays
             */
 
-            static int[] Merge(int[] LA, int[] RA, int[] A)
+          /*  static int[] Merge(int[] LA, int[] RA, int[] A)
             {
 
                 int i = 0;
@@ -207,7 +207,7 @@ namespace MergeSort
             implement MergeSort method: takes an integer array by reference
             and makes some recursive calls to intself and then sorts the array
             */
-            static int[] MergeSort(int[] A)
+         /*   static int[] MergeSort(int[] A)
             {
                 // TODO :implement
                 int array_length = A.Length;
@@ -304,6 +304,6 @@ namespace MergeSort
 
         }
 
-        
+        */
     }
 }

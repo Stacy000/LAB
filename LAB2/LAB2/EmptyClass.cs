@@ -7,7 +7,7 @@ namespace pi
 {
     class Program
     {
-     /*   static void Main(string[] args)
+        static void Main(string[] args)
         {
             long numberOfSamples = 1000;
             long hits = 0;
@@ -113,6 +113,6 @@ namespace pi
 
             
         }
-     */
+     
     }
 }
