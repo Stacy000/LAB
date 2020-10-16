@@ -2,7 +2,8 @@ Stacy Shang 62961990
 Lab 2 Part 1  
 **Question 1:**    
  #Threads=4
- |array size        |single-thread (s)      |multi-thread (s)| 
+ |array size        |single-thread (s)      |multi-thread (s)|
+ |------------------|-----------------------|----------------|
  |10                |   0.0000027           |  0.0028478     |
  |100               |   0.0000559           |  0.0037507     |
  |1000              |   0.0005347           |  0.0044462     |
