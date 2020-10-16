@@ -35,8 +35,9 @@ Lab 2 Part 1
  |40            |     0.3708897         |    0.5630559      |       0.66|
  |70            |     0.4006481         |    1.0248229      |       0.39|
  |100           |     0.3828021         |    1.2806604      |       0.30|
- |200           |     0.3813904         |    2.4955226      |       0.15|  
- y = -0.358ln(x) + 2.0031  
+ |200           |     0.3813904         |    2.4955226      |       0.15|    
+ 
+ *y = -0.358ln(x) + 2.0031*  
  in conclusion, as the number of threads increases, for array size of 1 million, the speed factor will decrease.  
  
  **Part2**   
