@@ -13,9 +13,9 @@ Lab 2 Part 1
  |10000000          |   4.2140990           |  2.8845874     |
  
  **Question 2:**  
- my laptop has 4 cores.  
+ my laptop has 4 cores, i'm expecting speed-up factor of 4.    
  
- ##Question 3:##  
+ **Question 3:**  
  |array size      |  single-thread (s)    |  multi-thread (s)  |  speed-up factor|
  |----------------|-----------------------|--------------------|-----------------|
  |1000000         |      0.4249128        |     0.2524563      |     1.68x       |
@@ -27,14 +27,15 @@ Lab 2 Part 1
  **Question 4:**  
  array size=1000000  
  
- #threads        single-thread (s)      multi-thread (s)    speed-up factor
- 10                 0.3847501             0.3055320             1.26
- 20                 0.3719396             0.3544189             1.04
- 30                 0.3690568             0.4494049             0.82
- 40                 0.3708897             0.5630559             0.66
- 70                 0.4006481             1.0248229             0.39
- 100                0.3828021             1.2806604             0.30
- 200                0.3813904             2.4955226             0.15  
+ |#threads     |   single-thread (s)    |  multi-thread (s) |   speed-up factor|
+ |-------------|-----------------------|--------------------|-------------------|
+ |10            |     0.3847501         |    0.3055320      |      1.26|
+ |20            |     0.3719396         |    0.3544189      |       1.04|
+ |30            |     0.3690568         |    0.4494049      |       0.82|
+ |40            |     0.3708897         |    0.5630559      |       0.66|
+ |70            |     0.4006481         |    1.0248229      |       0.39|
+ |100           |     0.3828021         |    1.2806604      |       0.30|
+ |200           |     0.3813904         |    2.4955226      |       0.15|  
  y = -0.358ln(x) + 2.0031  
  in conclusion, as the number of threads increases, for array size of 1 million, the speed factor will decrease.  
  
