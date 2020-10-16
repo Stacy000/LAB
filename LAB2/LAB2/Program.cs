@@ -8,10 +8,10 @@ namespace MergeSort
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
 
-            int ARRAY_SIZE = 15;
+            int ARRAY_SIZE = 20;
             int[] arraySingleThread = new int[ARRAY_SIZE];
             int[] arrayMultiThread = new int[ARRAY_SIZE];
             List<int> multi = new List<int>();
@@ -24,10 +24,14 @@ namespace MergeSort
                 arraySingleThread[k] = rand.Next(1000);
             }
 
-          
+        //    Console.Write("we will merge sort numbers ："); //显示需要排序的随机数数组 新增
+         //   PrintArray(arraySingleThread);
+
+            //PrintArray(arraySingleThread);
+
             Array.Copy(arraySingleThread, 0, arrayMultiThread, 0, arraySingleThread.Length);
 
-            //PrintArray(arrayMultiThread);
+            
 
             Console.WriteLine("enter a number of multithread that you wish to merge");
             int.TryParse(Console.ReadLine().Trim(), out int n);
@@ -35,6 +39,7 @@ namespace MergeSort
             
             for(int u = 0; u < arrayMultiThread.Length; u++)
             {
+                
                 multi.Add(arrayMultiThread[u]);
             }
 
@@ -47,91 +52,67 @@ namespace MergeSort
              
             int j = 0;
 
-            List<int> subList = new List<int>();
+            List<int[]> subList = new List<int[]>();
 
             int[] subArray = new int[] { };
 
-            ArrayList myAL = new ArrayList();
+            Mutex mut = new Mutex();
 
             Stopwatch clock_multi = new Stopwatch();
-          //  int[] sub_array1 = new int[] { };
-          //  int[] merge = new int[] { };
-
-            PrintArray(arrayMultiThread);
+          
+            
             clock_multi.Start();
-            if (n == 2) //splitting the array into 2 multi-thread
+
+            while (j < multi.Count)
             {
-                int[] subArray1 = subArrays(j, chunkSize, arrayMultiThread);
-                //PrintArray(subArray1);
-                j = chunkSize;
-                int[] subArray2 = subArrays(j, multi.Count - chunkSize,arrayMultiThread);
-                //PrintArray(subArray2);
+                subArray = subArrays(j, chunkSize, arrayMultiThread); //call the subarray function.
+                //the next sub-array will start with index j+chunkSize
+                j = j + chunkSize;
 
-                Thread t1 = new Thread(() => MergeSort(subArray1));
-
-                Thread t2 = new Thread(() => MergeSort(subArray2));
-
-                t1.Start();
-                t2.Start();
-                t1.Join();
-                t2.Join();
-
-                Merge(subArray1, subArray2, arrayMultiThread);
-               // PrintArray(arrayMultiThread);
-            }
-
-
-             else
-             {
-                 while (j < multi.Count)
-                 {
-                     subArray = subArrays(j, chunkSize, arrayMultiThread); //call the subarray function.
-
-
-                     Thread t = new Thread(() =>
-
-                     {
-                         MergeSort(subArray); //mergesort the sub-array
-
-                         // merge = Merge(subArray, sub_array1, arrayMultiThread);
-                         // sub_array1 = subArray;
-                         // subArray = merge;
-                         /* for (int x = 0; x < subArray.Length; x++)
-                          {
-                              arrayMultiThread[j - chunkSize + x] = subArray[x]; //replace arrayMultiThread with sorted sub-arrays
-                          }*/
-
-                     });
-
-                     
-                     j = j + chunkSize; //the next sub-array will start with index j+chunkSize
-                     t.Start();
-                     t.Join();
-                     PrintArray(subArray);
-                    //threads.Add(t);
-
-                }
-
-                /* foreach (Thread thread in threads)
-                 {
-                     thread.Join(); //to make sure the threads are processing in order.
+               // mut.WaitOne();
+                Thread t1 = new Thread(() =>
+                {
+                    
+                    MergeSort(subArray);
                     
 
-                }
-                */
-                 foreach(object x in myAL)
-                {
-                    Console.WriteLine("why" + x);
-                }
+                }); //mergesort the sub-array
 
-              
+
+
+                subList.Add(subArray);
+
+                t1.Start();
+
+                
+                //mut.ReleaseMutex();
+
+                threads.Add(t1);
+                
+            }
+
+            foreach (Thread thread in threads)
+            {
+                thread.Join(); //to make sure the threads are processing in order.
 
 
             }
+
+            PrintArray(subList[0]);
+            PrintArray(subList[1]);
+
+            while (subList.Count != 1)
+            {
+                int[] temp = Merge_2(subList[subList.Count - 1], subList[subList.Count - 2]);
+                subList.RemoveAt(subList.Count - 1);
+                subList.RemoveAt(subList.Count - 1);
+                subList.Add(temp);
+            }
             
             
-           // MergeSort(arrayMultiThread);
-            PrintArray(arrayMultiThread);
+            arrayMultiThread = subList[0];
+
+            //PrintArray(arrayMultiThread);
 
             clock_multi.Stop();
 
@@ -314,6 +295,19 @@ namespace MergeSort
                 }
 
                 return subArray;
+            }
+
+
+            static int[] Merge_2(int[] a1, int[] a2)
+            {
+                int[] mergeArray = new int[a1.Length + a2.Length];
+
+                a1.CopyTo(mergeArray, 0);
+                a2.CopyTo(mergeArray, a1.Length);
+
+                Array.Sort(mergeArray); //此部分可以修改成以一个为母数组，另一个数组为子数组，循环将子数组元素插入进母数组中
+
+                return mergeArray;
             }
 
 
