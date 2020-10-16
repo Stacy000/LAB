@@ -11,7 +11,7 @@ namespace MergeSort
         static void Main()
         {
 
-            int ARRAY_SIZE = 20;
+            int ARRAY_SIZE = 100000000;
             int[] arraySingleThread = new int[ARRAY_SIZE];
             int[] arrayMultiThread = new int[ARRAY_SIZE];
             List<int> multi = new List<int>();
@@ -24,15 +24,15 @@ namespace MergeSort
                 arraySingleThread[k] = rand.Next(1000);
             }
 
-        //    Console.Write("we will merge sort numbers ："); //显示需要排序的随机数数组 新增
-         //   PrintArray(arraySingleThread);
+           // Console.Write("we will merge sort numbers ："); 
+           // PrintArray(arraySingleThread);
 
-            //PrintArray(arraySingleThread);
-
+            
+            //make the arrayMultiThread same as arraySingle for futhur implementation and comparison
             Array.Copy(arraySingleThread, 0, arrayMultiThread, 0, arraySingleThread.Length);
 
             
-
+            //tell the program a number of multi-Thread to be separated.
             Console.WriteLine("enter a number of multithread that you wish to merge");
             int.TryParse(Console.ReadLine().Trim(), out int n);
 
@@ -43,18 +43,18 @@ namespace MergeSort
                 multi.Add(arrayMultiThread[u]);
             }
 
-            
 
 
 
-            
+            //*****Working on multi thread*****//
+
             int chunkSize = multi.Count / n;
              
             int j = 0;
 
             List<int[]> subList = new List<int[]>();
 
-            int[] subArray = new int[] { };
+           // int[] subArray = new int[] { };
 
             Mutex mut = new Mutex();
 
@@ -65,28 +65,27 @@ namespace MergeSort
 
             while (j < multi.Count)
             {
-                subArray = subArrays(j, chunkSize, arrayMultiThread); //call the subarray function.
+                int [] subArray = subArrays(j, chunkSize, arrayMultiThread); //call the subarray function and store the range into subArray.
+
                 //the next sub-array will start with index j+chunkSize
                 j = j + chunkSize;
 
-               // mut.WaitOne();
+               
                 Thread t1 = new Thread(() =>
                 {
                     
-                    MergeSort(subArray);
-                    
-
-                }); //mergesort the sub-array
+                    MergeSort(subArray);//mergesort the sub-array
 
 
+                }); 
 
+
+                //add the sorted subarrays into a list array
                 subList.Add(subArray);
-
+                
                 t1.Start();
 
                 
-                //mut.ReleaseMutex();
-
                 threads.Add(t1);
                 
             }
@@ -98,33 +97,45 @@ namespace MergeSort
 
             }
 
-            PrintArray(subList[0]);
-            PrintArray(subList[1]);
+            //PrintArray(subList[0]);
+            //PrintArray(subList[1]);
 
             while (subList.Count != 1)
             {
-                int[] temp = Merge_2(subList[subList.Count - 1], subList[subList.Count - 2]);
+
+                int[] temp = new int[] { };
+                var myList = new List<int>();
+
+                myList.AddRange(subList[subList.Count - 1]);
+                myList.AddRange(subList[subList.Count - 2]);
+
+                temp = myList.ToArray();
+
+                Merge(subList[subList.Count - 1], subList[subList.Count - 2], temp);
+
                 subList.RemoveAt(subList.Count - 1);
                 subList.RemoveAt(subList.Count - 1);
                 subList.Add(temp);
+
             }
-            
-            
+
+
             arrayMultiThread = subList[0];
 
-            //PrintArray(arrayMultiThread);
+         // PrintArray(arrayMultiThread);
 
             clock_multi.Stop();
 
             TimeSpan timeMulti = clock_multi.Elapsed;
 
             Console.WriteLine("the execution time for multi thread is" + timeMulti);
-            // PrintArray(arrayMultiThread);
+           
 
             bool A = IsSorted(arrayMultiThread);
 
             Console.WriteLine(A);
 
+            //*****Working on single thread*****//
 
             Stopwatch single = new Stopwatch();
 
@@ -132,11 +143,8 @@ namespace MergeSort
 
             MergeSort(arraySingleThread);
 
-            
-
             single.Stop();
 
-            
             TimeSpan timeSingle = single.Elapsed;
 
             Console.WriteLine("the execution time for single thread is" + timeSingle);
@@ -298,17 +306,7 @@ namespace MergeSort
             }
 
 
-            static int[] Merge_2(int[] a1, int[] a2)
-            {
-                int[] mergeArray = new int[a1.Length + a2.Length];
-
-                a1.CopyTo(mergeArray, 0);
-                a2.CopyTo(mergeArray, a1.Length);
-
-                Array.Sort(mergeArray); //此部分可以修改成以一个为母数组，另一个数组为子数组，循环将子数组元素插入进母数组中
-
-                return mergeArray;
-            }
+            
 
 
         }
